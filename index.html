@@ -5,119 +5,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Home</title>
+    <title>ELLUNE – Beauty and style</title>
 </head>
 
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
 
-    <!-- Header -->
     <header>
-        <nav class="navbar">
+        <nav class="navbar" aria-label="Primary">
             <div class="nav-left">
-                <button class="menu-btn" id="open-menu-btn" aria-label="Open menu">☰</button>
+                <button type="button" class="menu-btn" id="open-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="menu-modal">
+                    <img src="assets/icons/menu.svg" alt="" width="24" height="24">
+                </button>
             </div>
 
-            <a href="index.html" class="logo">MY WEBSITE</a>
+            <a href="index.html" class="logo" data-nav-page="index.html" aria-current="page">ELLUNE</a>
+
+            <nav class="desktop-nav" id="desktop-nav" aria-label="Categories"></nav>
 
             <div class="nav-right">
-                <a href="search.html" aria-label="Search">
+                <button type="button" id="search-toggle-btn" class="icon-btn" aria-label="Search" aria-expanded="false" aria-controls="header-search">
                     <img src="assets/icons/search.svg" alt="" width="20" height="20">
-                </a>
-                <a href="favorites.html" aria-label="Favorites">
+                </button>
+                <a href="favorites.html" aria-label="Favorites" data-nav-page="favorites.html">
                     <img src="assets/icons/heart.svg" alt="" width="20" height="20">
                 </a>
-                <a href="cart.html" class="cart-link" aria-label="Cart">
+                <a href="cart.html" class="cart-link" aria-label="Cart" data-nav-page="cart.html">
                     <img src="assets/icons/shopping-bag.svg" alt="" width="20" height="20">
                     <span id="cart-badge" class="cart-badge" hidden>0</span>
                 </a>
             </div>
         </nav>
 
-        <!-- Menu overlay (dold tills man klickar på ☰) -->
-        <div class="menu-modal" id="menu-modal">
-            <button class="close-menu-btn" id="close-menu-btn" aria-label="Close menu">✕</button>
-            <h2>Categories</h2>
-            <ul class="menu-list">
-                <li><a href="products.html">Shop all</a></li>
-                <li><a href="products.html">Category 1</a></li>
-                <li><a href="products.html">Category 2</a></li>
-                <li><a href="products.html">Category 3</a></li>
-            </ul>
+        <div id="header-search" class="header-search" hidden>
+            <form action="products.html" method="get" role="search" class="header-search-form">
+                <label for="header-search-input" class="visually-hidden">Search products</label>
+                <input type="search" id="header-search-input" name="q" placeholder="Search products..." required>
+                <button type="submit" class="header-search-submit">Search</button>
+            </form>
         </div>
+
+        <dialog class="menu-modal" id="menu-modal" aria-label="Menu">
+            <button type="button" class="close-menu-btn" id="close-menu-btn" aria-label="Close menu">
+                <img src="assets/icons/close.svg" alt="" width="24" height="24">
+            </button>
+            <h2>Menu</h2>
+            <ul class="menu-list" id="menu-list"></ul>
+        </dialog>
     </header>
 
-    <!-- Main -->
-    <main>
-
-        <!-- Hero -->
-        <section class="hero-section container">
-            <img src="images/news-banner.jpg" alt="Latest news">
+    <main id="main">
+        <section class="hero-section">
+            <img
+                class="hero-image"
+                src="assets/images/hero-800.webp"
+                srcset="assets/images/hero-800.webp 800w, assets/images/hero-1600.webp 1600w"
+                sizes="100vw"
+                width="1600"
+                height="900"
+                alt="Soft natural light on beauty products and skincare bottles"
+            >
             <div class="hero-content">
-                <h1>New collection</h1>
-                <a href="products.html" class="hero-btn">See products</a>
+                <p class="hero-brand">ELLUNE</p>
+                <h1>Glow your own way</h1>
+                <p class="hero-text">Beauty and style for everyday rituals – curated for women, with essentials for men too.</p>
+                <div class="hero-actions">
+                    <a href="products.html?category=beauty" class="hero-btn">Shop beauty</a>
+                    <a href="products.html" class="hero-btn hero-btn--outline">Shop all</a>
+                </div>
             </div>
         </section>
 
-        <!-- News -->
         <section class="home-section container">
-            <h2>News</h2>
-            <div class="home-grid">
-                <article class="product-card">
-                    <a href="product.html"><img src="images/news1.jpg" alt="News"></a>
-                </article>
-                <article class="product-card">
-                    <a href="product.html"><img src="images/news2.jpg" alt="News"></a>
-                </article>
-                <article class="product-card">
-                    <a href="product.html"><img src="images/news3.jpg" alt="News"></a>
-                </article>
-                <article class="product-card">
-                    <a href="product.html"><img src="images/news4.jpg" alt="News"></a>
-                </article>
-                <article class="product-card">
-                    <a href="product.html"><img src="images/news5.jpg" alt="News"></a>
-                </article>
-                <article class="product-card">
-                    <a href="product.html"><img src="images/news6.jpg" alt="News"></a>
-                </article>
-            </div>
+            <h2>Shop by category</h2>
+            <ul class="category-tiles">
+                <li>
+                    <a href="products.html?category=beauty" class="category-tile">
+                        <img src="assets/images/cat-makeup.webp" alt="" width="600" height="750" loading="lazy">
+                        <span>Makeup</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="products.html?category=fragrances" class="category-tile">
+                        <img src="assets/images/cat-fragrances.webp" alt="" width="600" height="750" loading="lazy">
+                        <span>Fragrances</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="products.html?category=skin-care" class="category-tile">
+                        <img src="assets/images/cat-skincare.webp" alt="" width="600" height="750" loading="lazy">
+                        <span>Skin care</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="products.html?category=womens-dresses" class="category-tile">
+                        <img src="assets/images/cat-dresses.webp" alt="" width="600" height="750" loading="lazy">
+                        <span>Dresses</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="products.html?category=womens-bags" class="category-tile">
+                        <img src="assets/images/cat-bags.webp" alt="" width="600" height="750" loading="lazy">
+                        <span>Bags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="products.html?category=mens-shirts" class="category-tile">
+                        <img src="assets/images/cat-mens.webp" alt="" width="600" height="750" loading="lazy">
+                        <span>Men's shirts</span>
+                    </a>
+                </li>
+            </ul>
         </section>
 
-        <!-- Best Sellers -->
-        <section class="home-section container">
-            <h2>Best Sellers</h2>
-            <div class="home-grid">
-                <article class="product-card">
-                    <a href="product.html"><img src="images/bestseller1.jpg" alt="Best seller"></a>
-                </article>
-                <article class="product-card">
-                    <a href="product.html"><img src="images/bestseller2.jpg" alt="Best seller"></a>
-                </article>
-                <article class="product-card">
-                    <a href="product.html"><img src="images/bestseller3.jpg" alt="Best seller"></a>
-                </article>
-                <article class="product-card">
-                    <a href="product.html"><img src="images/bestseller4.jpg" alt="Best seller"></a>
-                </article>
-                <article class="product-card">
-                    <a href="product.html"><img src="images/bestseller5.jpg" alt="Best seller"></a>
-                </article>
-                <article class="product-card">
-                    <a href="product.html"><img src="images/bestseller6.jpg" alt="Best seller"></a>
-                </article>
-            </div>
+        <section class="home-section container" id="beauty-favourites" data-category="beauty">
+            <h2>Beauty favourites</h2>
+            <p class="section-status" role="status">Loading products...</p>
+            <div class="home-grid"></div>
         </section>
 
+        <section class="home-section container" id="style-picks" data-category="womens-dresses">
+            <h2>Style picks</h2>
+            <p class="section-status" role="status">Loading products...</p>
+            <div class="home-grid"></div>
+        </section>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Ecommerce Group Project</p>
+        <p>&copy; 2026 ELLUNE</p>
     </footer>
 
     <script type="module" src="js/navigation.js"></script>
-    <script src="js/home.js"></script>
-
+    <script type="module" src="js/home.js"></script>
 </body>
 
 </html>

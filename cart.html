@@ -7,47 +7,56 @@
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="js/cart.js"></script>
     <script type="module" src="js/navigation.js"></script>
-    <title>Shopping cart</title>
+    <title>Shopping cart – ELLUNE</title>
 </head>
 
 <body>
-    <!-- Header -->
+    <a href="#main" class="skip-link">Skip to content</a>
+
     <header>
-        <nav class="navbar">
+        <nav class="navbar" aria-label="Primary">
             <div class="nav-left">
-                <button class="menu-btn" id="open-menu-btn" aria-label="Open menu">☰</button>
+                <button type="button" class="menu-btn" id="open-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="menu-modal">
+                    <img src="assets/icons/menu.svg" alt="" width="24" height="24">
+                </button>
             </div>
 
-            <a href="index.html" class="logo">MY WEBSITE</a>
+            <a href="index.html" class="logo" data-nav-page="index.html">ELLUNE</a>
+
+            <nav class="desktop-nav" id="desktop-nav" aria-label="Categories"></nav>
 
             <div class="nav-right">
-                <a href="search.html" aria-label="Search">
+                <button type="button" id="search-toggle-btn" class="icon-btn" aria-label="Search" aria-expanded="false" aria-controls="header-search">
                     <img src="assets/icons/search.svg" alt="" width="20" height="20">
-                </a>
-                <a href="favorites.html" aria-label="Favorites">
+                </button>
+                <a href="favorites.html" aria-label="Favorites" data-nav-page="favorites.html">
                     <img src="assets/icons/heart.svg" alt="" width="20" height="20">
                 </a>
-                <a href="cart.html" class="cart-link" aria-label="Cart">
+                <a href="cart.html" class="cart-link" aria-label="Cart" data-nav-page="cart.html" aria-current="page">
                     <img src="assets/icons/shopping-bag.svg" alt="" width="20" height="20">
                     <span id="cart-badge" class="cart-badge" hidden>0</span>
                 </a>
             </div>
         </nav>
 
-        <!-- Menu overlay (dold tills man klickar på ☰) -->
-        <div class="menu-modal" id="menu-modal">
-            <button class="close-menu-btn" id="close-menu-btn" aria-label="Close menu">✕</button>
-            <h2>Categories</h2>
-            <ul class="menu-list">
-                <li><a href="products.html">Shop all</a></li>
-                <li><a href="products.html">Category 1</a></li>
-                <li><a href="products.html">Category 2</a></li>
-                <li><a href="products.html">Category 3</a></li>
-            </ul>
+        <div id="header-search" class="header-search" hidden>
+            <form action="products.html" method="get" role="search" class="header-search-form">
+                <label for="header-search-input" class="visually-hidden">Search products</label>
+                <input type="search" id="header-search-input" name="q" placeholder="Search products..." required>
+                <button type="submit" class="header-search-submit">Search</button>
+            </form>
         </div>
+
+        <dialog class="menu-modal" id="menu-modal" aria-label="Menu">
+            <button type="button" class="close-menu-btn" id="close-menu-btn" aria-label="Close menu">
+                <img src="assets/icons/close.svg" alt="" width="24" height="24">
+            </button>
+            <h2>Menu</h2>
+            <ul class="menu-list" id="menu-list"></ul>
+        </dialog>
     </header>
 
-    <main>
+    <main id="main">
         <section class="container cart-page">
             <h1>Shopping cart</h1>
 
@@ -64,14 +73,10 @@
                 </thead>
 
                 <tbody id="cart-items">
-
                     <tr id="cart-empty" hidden>
                         <td colspan="4" class="cart-empty">Your cart is empty</td>
                     </tr>
-
-                    <!-- Läggs in med JavaScript -->
                 </tbody>
-
             </table>
 
             <p class="cart-summary">Total: <strong id="cart-total">0 kr</strong></p>
@@ -79,12 +84,11 @@
             <button id="checkout-button" type="button">Place order</button>
 
             <a class="back-to-shopping" href="products.html" id="back-link">Back to shopping</a>
-
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Ecommerce Group Project</p>
+        <p>&copy; 2026 ELLUNE</p>
     </footer>
 </body>
 
