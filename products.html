@@ -7,54 +7,65 @@
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="js/products.js"></script>
     <script type="module" src="js/navigation.js"></script>
-    <title>Products catalog</title>
+    <title>Products – ELLUNE</title>
 </head>
 
 <body>
-    <!-- Header -->
+    <a href="#main" class="skip-link">Skip to content</a>
+
     <header>
-        <nav class="navbar">
+        <nav class="navbar" aria-label="Primary">
             <div class="nav-left">
-                <button class="menu-btn" id="open-menu-btn" aria-label="Open menu">☰</button>
+                <button type="button" class="menu-btn" id="open-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="menu-modal">
+                    <img src="assets/icons/menu.svg" alt="" width="24" height="24">
+                </button>
             </div>
 
-            <a href="index.html" class="logo">MY WEBSITE</a>
+            <a href="index.html" class="logo" data-nav-page="index.html">ELLUNE</a>
+
+            <nav class="desktop-nav" id="desktop-nav" aria-label="Categories"></nav>
 
             <div class="nav-right">
-                <a href="search.html" aria-label="Search">
+                <button type="button" id="search-toggle-btn" class="icon-btn" aria-label="Search" aria-expanded="false" aria-controls="header-search">
                     <img src="assets/icons/search.svg" alt="" width="20" height="20">
-                </a>
-                <a href="favorites.html" aria-label="Favorites">
+                </button>
+                <a href="favorites.html" aria-label="Favorites" data-nav-page="favorites.html">
                     <img src="assets/icons/heart.svg" alt="" width="20" height="20">
                 </a>
-                <a href="cart.html" class="cart-link" aria-label="Cart">
+                <a href="cart.html" class="cart-link" aria-label="Cart" data-nav-page="cart.html">
                     <img src="assets/icons/shopping-bag.svg" alt="" width="20" height="20">
                     <span id="cart-badge" class="cart-badge" hidden>0</span>
                 </a>
             </div>
         </nav>
 
-        <!-- Menu overlay (dold tills man klickar på ☰) -->
-        <div class="menu-modal" id="menu-modal">
-            <button class="close-menu-btn" id="close-menu-btn" aria-label="Close menu">✕</button>
-            <h2>Categories</h2>
-            <ul class="menu-list">
-                <li><a href="products.html">Shop all</a></li>
-                <li><a href="products.html">Category 1</a></li>
-                <li><a href="products.html">Category 2</a></li>
-                <li><a href="products.html">Category 3</a></li>
-            </ul>
+        <div id="header-search" class="header-search" hidden>
+            <form action="products.html" method="get" role="search" class="header-search-form">
+                <label for="header-search-input" class="visually-hidden">Search products</label>
+                <input type="search" id="header-search-input" name="q" placeholder="Search products..." required>
+                <button type="submit" class="header-search-submit">Search</button>
+            </form>
         </div>
+
+        <dialog class="menu-modal" id="menu-modal" aria-label="Menu">
+            <button type="button" class="close-menu-btn" id="close-menu-btn" aria-label="Close menu">
+                <img src="assets/icons/close.svg" alt="" width="24" height="24">
+            </button>
+            <h2>Menu</h2>
+            <ul class="menu-list" id="menu-list"></ul>
+        </dialog>
     </header>
 
-    <main>
+    <main id="main">
         <nav class="breadcrumbs container" aria-label="Breadcrumb">
             <a href="index.html">Home</a>
-            <span>&gt;</span>
+            <span aria-hidden="true">&gt;</span>
             <span id="breadcrumb-current"></span>
         </nav>
 
         <h1 id="products-heading" class="container products-heading">Products</h1>
+
+        <p id="catalog-status" class="container status-message" role="status" hidden></p>
 
         <div class="sort-filter-wrapper container">
             <button type="button" id="open-filter-btn" class="open-filter-btn">
@@ -68,31 +79,26 @@
             </select>
         </div>
 
-        <div id="filter-modal" class="filter-modal">
+        <dialog id="filter-modal" class="filter-modal" aria-label="Filter products">
             <div class="filter-header">
                 <button type="button" id="close-filter-btn" class="close-filter-btn" aria-label="Close filter">
-                    <span aria-hidden="true">&times;</span>
+                    <img src="assets/icons/close.svg" alt="" width="24" height="24">
                 </button>
                 <h2>Filter</h2>
             </div>
 
             <div class="filter-content">
                 <h3>Categories</h3>
-
-                <ul id="filter-category-list" class="filter-list">
-                </ul>
-
+                <ul id="filter-category-list" class="filter-list"></ul>
             </div>
 
             <div class="filter-footer">
                 <button type="button" id="apply-filter-btn" class="apply-filter-btn">Apply filter</button>
             </div>
-        </div>
+        </dialog>
 
-
-        <section class="container">
-            <div id="products-grid" class="products-grid">
-            </div>
+        <section class="container" aria-label="Product list">
+            <div id="products-grid" class="products-grid"></div>
         </section>
 
         <section class="load-more container">
@@ -100,10 +106,11 @@
         </section>
 
         <button type="button" id="open-add-product-btn" class="open-add-product-btn" aria-label="Add product">+</button>
-        <div id="add-product-modal" class="add-product-modal">
+
+        <dialog id="add-product-modal" class="add-product-modal" aria-label="Add product">
             <div class="add-product-header">
                 <button type="button" id="close-add-product-btn" class="close-add-product-btn" aria-label="Close add product">
-                    <span aria-hidden="true">&times;</span>
+                    <img src="assets/icons/close.svg" alt="" width="24" height="24">
                 </button>
                 <h2>Add product</h2>
             </div>
@@ -122,7 +129,7 @@
                 </label>
                 <label>
                     Category
-                    <input type="text" name="category" required>
+                    <input type="text" name="category" required placeholder="e.g. beauty">
                 </label>
                 <label>
                     Description
@@ -138,12 +145,11 @@
                     <button type="button" id="cancel-add-product-btn" class="cancel-btn">Cancel</button>
                 </div>
             </form>
-        </div>
-
+        </dialog>
     </main>
 
     <footer>
-        <p>&copy; 2026 Ecommerce Group Project</p>
+        <p>&copy; 2026 ELLUNE</p>
     </footer>
 </body>
 
